@@ -2475,12 +2475,13 @@ section,
 
 .contact-success-box {
   width: min(460px, 100%);
-  padding: 42px 34px 36px;
+  padding: 44px 34px 38px;
   text-align: center;
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--accent-color), transparent 82%) 0%, transparent 42%),
+    radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.2) 0%, transparent 38%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-color), var(--contrast-color) 3%), var(--surface-color)),
     var(--surface-color);
-  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 58%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 22px;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
   transform: translateY(24px) scale(0.96);
@@ -2502,17 +2503,42 @@ section,
   transform: translateY(0) scale(1);
 }
 
-.contact-success-box .success-check {
-  width: 86px;
-  height: 86px;
+.contact-success-box .success-symbol {
+  width: 104px;
+  height: 104px;
   margin: 0 auto 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  position: relative;
+}
+
+.contact-success-box .success-symbol::before,
+.contact-success-box .success-symbol::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  inset: 8px;
+}
+
+.contact-success-box .success-symbol::after {
+  inset: -4px;
+  opacity: 0.45;
+}
+
+.contact-success-box .success-check {
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: linear-gradient(135deg, #18c77f, #10b981);
   color: var(--contrast-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
+  font-size: 40px;
   transform: scale(0.65);
   box-shadow: 0 0 0 10px rgba(16, 185, 129, 0.12), 0 14px 34px rgba(16, 185, 129, 0.28);
   position: relative;
@@ -2535,10 +2561,25 @@ section,
   animation: success-ring 0.9s ease-out forwards;
 }
 
+.contact-success-box .success-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
 .contact-success-box h3 {
   margin: 0 0 12px;
   color: var(--heading-color);
-  font-size: 26px;
+  font-size: 27px;
   font-weight: 700;
 }
 
@@ -2548,6 +2589,28 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 20%);
   font-size: 15px;
   line-height: 1.7;
+}
+
+.contact-success-box .success-progress {
+  width: 100%;
+  height: 3px;
+  margin-top: 26px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--default-color), transparent 90%);
+  overflow: hidden;
+}
+
+.contact-success-box .success-progress::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, var(--accent-color));
+  transform-origin: left;
+}
+
+.contact-success-modal.show .success-progress::before {
+  animation: success-countdown 3.2s linear forwards;
 }
 
 @keyframes success-pop {
@@ -2573,6 +2636,16 @@ section,
   100% {
     opacity: 0;
     transform: scale(1.35);
+  }
+}
+
+@keyframes success-countdown {
+  0% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0);
   }
 }
 
